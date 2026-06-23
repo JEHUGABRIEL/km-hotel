@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
 import { Send } from "lucide-react";
 import { FacebookIcon, InstagramIcon, XIcon, YoutubeIcon } from "./SocialIcons";
-import { siteInfo, footerLinks } from "../data/siteData";
+import { useSiteInfo, useFooterLinks } from "../hooks/useSiteData";
 
 export default function Footer() {
+  const { data: siteInfo } = useSiteInfo();
+  const { data: footerLinks } = useFooterLinks();
+
   return (
     <footer className="bg-ink text-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-10 pt-16 pb-10">
@@ -11,7 +14,7 @@ export default function Footer() {
           <div>
             <Link to="/" className="font-heading font-extrabold text-2xl">
               {siteInfo.name}
-              <span className="text-coral-500">.</span>
+              <span className="text-brand-500">.</span>
             </Link>
             <p className="mt-4 text-white/60 leading-relaxed max-w-sm">
               {siteInfo.description}
@@ -28,7 +31,7 @@ export default function Footer() {
               <button
                 type="submit"
                 aria-label="S'inscrire"
-                className="px-4 bg-coral-500 hover:bg-coral-600 transition-colors flex items-center justify-center"
+                className="px-4 bg-brand-500 hover:bg-brand-600 transition-colors flex items-center justify-center"
               >
                 <Send className="w-4 h-4" />
               </button>

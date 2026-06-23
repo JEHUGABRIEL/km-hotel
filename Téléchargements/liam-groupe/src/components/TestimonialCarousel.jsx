@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { ChevronLeft, ChevronRight, Star } from "lucide-react";
-import { testimonials } from "../data/siteData";
+import { useTestimonials } from "../hooks/useSiteData";
 
 export default function TestimonialCarousel() {
   const [page, setPage] = useState(0);
+  const { data: testimonials } = useTestimonials();
   const pages = [testimonials, [...testimonials.slice(1), testimonials[0]]];
 
   return (
@@ -60,7 +61,7 @@ export default function TestimonialCarousel() {
             onClick={() => setPage(i)}
             aria-label={`Page ${i + 1}`}
             className={`h-2 rounded-full transition-all ${
-              i === page ? "w-7 bg-coral-500" : "w-2 bg-gray-300"
+              i === page ? "w-7 bg-brand-500" : "w-2 bg-gray-300"
             }`}
           />
         ))}

@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import { ChevronDown, Globe, Menu, X } from "lucide-react";
-import { navLinks, domains, siteInfo } from "../data/siteData";
+import { useNavLinks, useDomains, useSiteInfo } from "../hooks/useSiteData";
 
 /**
  * Navbar — reproduit le comportement observé sur les captures :
@@ -18,6 +18,9 @@ export default function Navbar({ transparentOnTop = true }) {
   const location = useLocation();
   const closeTimer = useRef(null);
   const [prevPath, setPrevPath] = useState(location.pathname);
+  const { data: navLinks } = useNavLinks();
+  const { data: domains } = useDomains();
+  const { data: siteInfo } = useSiteInfo();
 
   useEffect(() => {
     if (!transparentOnTop) return;
@@ -51,7 +54,7 @@ export default function Navbar({ transparentOnTop = true }) {
       <nav className="max-w-7xl mx-auto px-6 lg:px-10 h-[88px] flex items-center justify-between">
         <Link to="/" className="font-heading font-extrabold text-2xl tracking-tight">
           <span className={isTransparent ? "text-white" : "text-ink"}>{siteInfo.name}</span>
-          <span className="text-coral-500">.</span>
+          <span className="text-brand-500">.</span>
         </Link>
 
         <div className="hidden lg:flex items-center gap-8">
@@ -81,7 +84,7 @@ export default function Navbar({ transparentOnTop = true }) {
                       <Link
                         key={d.slug}
                         to={`/domaines/${d.slug}`}
-                        className="block px-5 py-2.5 text-gray-700 hover:bg-violet-50 hover:text-violet-600 transition-colors"
+                        className="block px-5 py-2.5 text-gray-700 hover:bg-brand-50 hover:text-brand-600 transition-colors"
                       >
                         {d.name}
                       </Link>
@@ -100,7 +103,7 @@ export default function Navbar({ transparentOnTop = true }) {
                         ? "text-white"
                         : "text-white/90 hover:text-white"
                       : isActive
-                      ? "text-violet-600"
+                      ? "text-brand-600"
                       : "text-gray-700 hover:text-ink"
                   }`
                 }
@@ -124,8 +127,8 @@ export default function Navbar({ transparentOnTop = true }) {
             to="/partenaires"
             className={`px-6 py-2.5 rounded-full font-semibold transition-colors ${
               isTransparent
-                ? "bg-coral-500 hover:bg-coral-600 text-white"
-                : "bg-violet-500 hover:bg-violet-600 text-white"
+                ? "bg-brand-500 hover:bg-brand-600 text-white"
+                : "bg-brand-500 hover:bg-brand-600 text-white"
             }`}
           >
             Devenir partenaire
@@ -177,7 +180,7 @@ export default function Navbar({ transparentOnTop = true }) {
           )}
           <Link
             to="/partenaires"
-            className="mt-3 block text-center px-6 py-2.5 rounded-full font-semibold bg-violet-500 text-white"
+            className="mt-3 block text-center px-6 py-2.5 rounded-full font-semibold bg-brand-500 text-white"
           >
             Devenir partenaire
           </Link>

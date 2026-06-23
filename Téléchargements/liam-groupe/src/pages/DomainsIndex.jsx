@@ -3,9 +3,11 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import SectionHeading from "../components/SectionHeading";
 import DomainCard from "../components/DomainCard";
-import { domains } from "../data/siteData";
+import { useDomains } from "../hooks/useSiteData";
 
 export default function DomainsIndex() {
+  const { data: domains } = useDomains();
+
   return (
     <div className="font-body">
       <Navbar transparentOnTop={false} />
@@ -14,7 +16,7 @@ export default function DomainsIndex() {
           <SectionHeading
             icon={LayoutGrid}
             eyebrow="Nos actions"
-            variant="violet"
+            variant="brand"
             title="Nos 6 domaines d'intervention"
             description="Des programmes concrets pour répondre aux besoins des communautés centrafricaines, avec un focus sur l'autonomisation des femmes et des jeunes."
           />

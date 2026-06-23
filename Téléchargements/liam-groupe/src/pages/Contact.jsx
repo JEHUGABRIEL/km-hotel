@@ -3,10 +3,12 @@ import { FacebookIcon, InstagramIcon, XIcon, YoutubeIcon } from "../components/S
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import SectionHeading from "../components/SectionHeading";
-import { siteInfo, img } from "../data/siteData";
+import { useSiteInfo } from "../hooks/useSiteData";
+import { img } from "../data/siteData";
 
 export default function Contact() {
-  const info = siteInfo.contactPage;
+  const { data: siteInfo } = useSiteInfo();
+  const info = siteInfo?.contactPage;
 
   return (
     <div className="font-body">
@@ -37,7 +39,7 @@ export default function Contact() {
                 <ContactItem icon={Clock} label="Horaires" lines={info.hours} />
               </div>
 
-              <div className="mt-10 bg-violet-50/60 rounded-2xl p-7">
+              <div className="mt-10 bg-brand-50/60 rounded-2xl p-7">
                 <h3 className="font-heading font-bold mb-1">Suivez-nous</h3>
                 <p className="text-gray-500 mb-5">
                   Restez informés de nos actualités et événements.
@@ -69,7 +71,7 @@ export default function Contact() {
               <Field label="Email" placeholder="votre@email.com" type="email" />
               <div>
                 <label className="block text-sm font-medium mb-2">Sujet</label>
-                <select className="w-full border border-gray-200 rounded-xl px-4 py-3 outline-none focus:border-violet-400 text-gray-600">
+                <select className="w-full border border-gray-200 rounded-xl px-4 py-3 outline-none focus:border-brand-400 text-gray-600">
                   <option>Choisir un sujet</option>
                   <option>Partenariat</option>
                   <option>Bénévolat</option>
@@ -83,13 +85,13 @@ export default function Contact() {
                   rows={5}
                   maxLength={500}
                   placeholder="Votre message…"
-                  className="w-full border border-gray-200 rounded-xl px-4 py-3 outline-none focus:border-violet-400 resize-none"
+                  className="w-full border border-gray-200 rounded-xl px-4 py-3 outline-none focus:border-brand-400 resize-none"
                 />
                 <p className="text-gray-400 text-xs mt-1.5">Maximum 500 caractères</p>
               </div>
               <button
                 type="submit"
-                className="w-full py-3.5 rounded-full bg-violet-500 hover:bg-violet-600 text-white font-semibold inline-flex items-center justify-center gap-2 transition-colors"
+                className="w-full py-3.5 rounded-full bg-brand-500 hover:bg-brand-600 text-white font-semibold inline-flex items-center justify-center gap-2 transition-colors"
               >
                 Envoyer le message <Send className="w-4 h-4" />
               </button>
@@ -119,7 +121,7 @@ export default function Contact() {
 function ContactItem({ icon: Icon, label, lines }) {
   return (
     <div className="flex gap-4">
-      <span className="w-11 h-11 rounded-full bg-violet-50 text-violet-600 flex items-center justify-center shrink-0">
+      <span className="w-11 h-11 rounded-full bg-brand-50 text-brand-600 flex items-center justify-center shrink-0">
         <Icon className="w-5 h-5" />
       </span>
       <div>
@@ -141,7 +143,7 @@ function Field({ label, placeholder, type = "text" }) {
       <input
         type={type}
         placeholder={placeholder}
-        className="w-full border border-gray-200 rounded-xl px-4 py-3 outline-none focus:border-violet-400"
+        className="w-full border border-gray-200 rounded-xl px-4 py-3 outline-none focus:border-brand-400"
       />
     </div>
   );

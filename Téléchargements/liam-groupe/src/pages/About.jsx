@@ -3,9 +3,13 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import SectionHeading from "../components/SectionHeading";
 import TeamCard from "../components/TeamCard";
-import { aboutStats, team, img } from "../data/siteData";
+import { useAboutStats, useTeam } from "../hooks/useSiteData";
+import { img } from "../data/siteData";
 
 export default function About() {
+  const { data: aboutStats } = useAboutStats();
+  const { data: team } = useTeam();
+
   return (
     <div className="font-body">
       <Navbar />
@@ -47,7 +51,7 @@ export default function About() {
 
               <div className="space-y-6">
                 <div className="flex gap-4">
-                  <span className="w-11 h-11 rounded-full bg-rose-50 text-coral-500 flex items-center justify-center shrink-0">
+                  <span className="w-11 h-11 rounded-full bg-brand-50 text-brand-500 flex items-center justify-center shrink-0">
                     <Target className="w-5 h-5" />
                   </span>
                   <div>
@@ -60,7 +64,7 @@ export default function About() {
                   </div>
                 </div>
                 <div className="flex gap-4">
-                  <span className="w-11 h-11 rounded-full bg-violet-50 text-violet-600 flex items-center justify-center shrink-0">
+                  <span className="w-11 h-11 rounded-full bg-brand-50 text-brand-600 flex items-center justify-center shrink-0">
                     <Compass className="w-5 h-5" />
                   </span>
                   <div>
@@ -94,11 +98,11 @@ export default function About() {
       </section>
 
       {/* STATS clair */}
-      <section className="bg-violet-50/60 py-14 px-6">
+      <section className="bg-brand-50/60 py-14 px-6">
         <div className="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
           {aboutStats.map((s) => (
             <div key={s.label}>
-              <p className="font-heading font-extrabold text-4xl md:text-5xl text-violet-600">
+              <p className="font-heading font-extrabold text-4xl md:text-5xl text-brand-600">
                 {s.value}
               </p>
               <p className="text-gray-500 mt-2">{s.label}</p>

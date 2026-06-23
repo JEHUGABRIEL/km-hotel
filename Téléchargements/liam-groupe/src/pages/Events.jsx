@@ -2,7 +2,8 @@ import { useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import EventCard from "../components/EventCard";
-import { events, img } from "../data/siteData";
+import { useEvents } from "../hooks/useSiteData";
+import { img } from "../data/siteData";
 
 const filters = [
   { key: "tous", label: "Tous" },
@@ -11,8 +12,9 @@ const filters = [
 ];
 
 export default function Events() {
+  const { data: events } = useEvents();
   const [active, setActive] = useState("tous");
-  const filtered = active === "tous" ? events : events.filter((e) => e.status === active);
+  const filtered = active === "tous" ? events : events?.filter((e) => e.status === active) ?? [];
 
   return (
     <div className="font-body">
@@ -35,7 +37,7 @@ export default function Events() {
                 onClick={() => setActive(f.key)}
                 className={`px-6 py-2.5 rounded-full font-semibold transition-colors ${
                   active === f.key
-                    ? "bg-violet-500 text-white"
+                    ? "bg-brand-500 text-white"
                     : "bg-gray-100 text-gray-600 hover:bg-gray-200"
                 }`}
               >

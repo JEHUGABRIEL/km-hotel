@@ -1,0 +1,104 @@
+import 'dotenv/config'
+import { createClient } from '@supabase/supabase-js'
+import {
+  siteInfo, navLinks, domains, homeHeroImages,
+  homeStats, aboutStats, events, news, team,
+  partners, testimonials, footerLinks,
+} from '../src/data/siteData.js'
+
+const supabase = createClient(
+  process.env.VITE_SUPABASE_URL,
+  process.env.VITE_SUPABASE_ANON_KEY,
+)
+
+async function seed() {
+  console.log('Seeding Supabase...')
+
+  // Domains
+  for (const d of domains) {
+    const { cardImage, slug, name, category, icon, shortDescription, heroImage, objectives, programs, stats, gallery } = d
+    await supabase.from('domains').upsert({
+      slug, name, category, icon,
+      short_description: shortDescription,
+      hero_image: heroImage,
+      objectives: JSON.parse(JSON.stringify(objectives)),
+      programs: JSON.parse(JSON.stringify(programs)),
+      stats: JSON.parse(JSON.stringify(stats)),
+      gallery: JSON.parse(JSON.stringify(gallery)),
+      order_index: domains.indexOf(d),
+    }, { onConflict: 'slug' })
+  }
+  console.log(`  ✓ ${domains.length} domains`)
+
+  // Events
+  for (const e of events) {
+    const { slug, title, description, date, location, image, status, category } = e
+    await supabase.from('events').upsert({
+      slug, title, description, date, location, image, status, category,
+      order_index: events.indexOf(e),
+    }, { onConflict: 'slug' })
+  }
+  console.log(`  ✓ ${events.length} events`)
+
+  // News
+  for (const n of news) {
+    const { slug, title, excerpt, image, date, tag } = n
+    await supabase.from('news').upsert({
+      slug, title, excerpt, image, date,
+      tags: JSON.parse(JSON.stringify([tag])),
+      order_index: news.indexOf(n),
+    }, { onConflict: 'slug' })
+  }
+  console.log(`  ✓ ${news.length} news`)
+
+  // Team
+  for (const m of team) {
+    const { name, role, image, description } = m
+    await supabase.from('team').upsert({
+      name, role, image, description,
+      order_index: team.indexOf(m),
+    }, { onConflict: 'name' })
+  }
+  console.log(`  ✓ ${team.length} team members`)
+
+  // Partners
+  for (const p of partners) {
+    const { name, subtitle, description, logo, initial, color, category, collaboration, website } = p
+    await supabase.from('partners').upsert({
+      name, subtitle, description, logo, initial, color, category, collaboration, website,
+      order_index: partners.indexOf(p),
+    }, { onConflict: 'name' })
+  }
+  console.log(`  ✓ ${partners.length} partners`)
+
+  // Testimonials
+  for (const t of testimonials) {
+    const { name, role, quote, image } = t
+    await supabase.from('testimonials').upsert({
+      name, role, quote, image,
+      order_index: testimonials.indexOf(t),
+    })
+  }
+  console.log(`  ✓ ${testimonials.length} testimonials`)
+
+  // Site settings
+  const settings = [
+    { key: 'siteInfo', value: siteInfo },
+    { key: 'navLinks', value: navLinks },
+    { key: 'homeHeroImages', value: homeHeroImages },
+    { key: 'homeStats', value: homeStats },
+    { key: 'aboutStats', value: aboutStats },
+    { key: 'footerLinks', value: footerLinks },
+  ]
+  for (const s of settings) {
+    await supabase.from('site_settings').upsert({
+      key: s.key,
+      value: s.value,
+    }, { onConflict: 'key' })
+  }
+  console.log(`  ✓ ${settings.length} site settings`)
+
+  console.log('Done!')
+}
+
+seed().catch(console.error)

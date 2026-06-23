@@ -1,9 +1,12 @@
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import NewsCard from "../components/NewsCard";
-import { news, img } from "../data/siteData";
+import { useNews } from "../hooks/useSiteData";
+import { img } from "../data/siteData";
 
 export default function News_() {
+  const { data: news } = useNews();
+
   return (
     <div className="font-body">
       <Navbar />

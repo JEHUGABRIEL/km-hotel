@@ -4,9 +4,12 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import SectionHeading from "../components/SectionHeading";
 import PartnerCard from "../components/PartnerCard";
-import { partners, img } from "../data/siteData";
+import { usePartners } from "../hooks/useSiteData";
+import { img } from "../data/siteData";
 
 export default function Partners() {
+  const { data: partners } = usePartners();
+
   return (
     <div className="font-body">
       <Navbar />
@@ -37,10 +40,10 @@ export default function Partners() {
 
       <section className="bg-ink py-20 px-6">
         <div className="max-w-2xl mx-auto text-center">
-          <div className="flex items-center justify-center gap-3 text-coral-500 font-semibold tracking-[0.2em] text-xs uppercase mb-4">
-            <span className="h-px w-10 bg-coral-500/40" />
+          <div className="flex items-center justify-center gap-3 text-brand-500 font-semibold tracking-[0.2em] text-xs uppercase mb-4">
+            <span className="h-px w-10 bg-brand-500/40" />
             Rejoignez-nous
-            <span className="h-px w-10 bg-coral-500/40" />
+            <span className="h-px w-10 bg-brand-500/40" />
           </div>
           <h2 className="font-heading font-bold text-3xl md:text-4xl text-white mb-4">
             Devenez partenaire de LIAM Groupe
@@ -53,7 +56,7 @@ export default function Partners() {
           <div className="flex flex-wrap items-center justify-center gap-4">
             <a
               href="#"
-              className="px-7 py-3 rounded-full bg-coral-500 hover:bg-coral-600 text-white font-semibold transition-colors"
+              className="px-7 py-3 rounded-full bg-brand-500 hover:bg-brand-600 text-white font-semibold transition-colors"
             >
               Postuler au partenariat
             </a>

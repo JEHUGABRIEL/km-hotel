@@ -6,11 +6,11 @@ import SectionHeading from "../components/SectionHeading";
 import StatsBand from "../components/StatsBand";
 import { ActCTA } from "../components/CTASection";
 import { DomainIcon } from "../components/DomainIcon";
-import { domains } from "../data/siteData";
+import { useDomain } from "../hooks/useSiteData";
 
 export default function Domain() {
   const { slug } = useParams();
-  const domain = domains.find((d) => d.slug === slug);
+  const { data: domain } = useDomain(slug);
 
   if (!domain) return <Navigate to="/domaines" replace />;
 
@@ -37,7 +37,7 @@ export default function Domain() {
                 key={o}
                 className="flex gap-4 items-start border border-gray-100 rounded-2xl p-6 shadow-card"
               >
-                <span className="w-9 h-9 rounded-full bg-rose-50 text-coral-500 font-heading font-bold flex items-center justify-center shrink-0">
+                <span className="w-9 h-9 rounded-full bg-brand-50 text-brand-500 font-heading font-bold flex items-center justify-center shrink-0">
                   {i + 1}
                 </span>
                 <p className="text-gray-600 leading-relaxed pt-1">{o}</p>
@@ -54,7 +54,7 @@ export default function Domain() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-7">
             {domain.programs.map((p) => (
               <div key={p.title} className="bg-white rounded-2xl border border-gray-100 shadow-card p-7">
-                <span className="w-12 h-12 rounded-full bg-violet-50 text-violet-600 flex items-center justify-center mb-5">
+                <span className="w-12 h-12 rounded-full bg-brand-50 text-brand-600 flex items-center justify-center mb-5">
                   <DomainIcon icon={domain.icon} className="w-6 h-6" />
                 </span>
                 <h3 className="font-heading font-bold text-lg mb-2">{p.title}</h3>
@@ -66,7 +66,7 @@ export default function Domain() {
       </section>
 
       {/* STATS */}
-      <StatsBand stats={domain.stats} tone="coral" />
+      <StatsBand stats={domain.stats} tone="brand" />
 
       {/* GALERIE */}
       <section className="py-24 px-6">
