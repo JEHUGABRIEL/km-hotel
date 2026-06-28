@@ -15,6 +15,7 @@ import {
 import { HeroSlider } from "./HeroSlider";
 import { TestimonialsSection } from "./TestimonialsSection";
 import { PartnersSection } from "./PartnersSection";
+import { FeaturedProductsSection } from "./FeaturedProductsSection";
 import { Boutique } from "./Boutique";
 import { ProductPage } from "./ProductPage";
 import { AdminPage } from "./AdminPage";
@@ -137,8 +138,8 @@ function NavBar({ onOpenContact }: { onOpenContact: () => void }) {
     <nav
       className={`fixed w-full z-50 navbar-transition ${
         isScrolled
-          ? "bg-white/95 backdrop-blur-md shadow-lg shadow-slate-900/5 border-b border-slate-100 py-2"
-          : "bg-white/80 backdrop-blur-md border-b border-transparent py-3 md:py-4"
+          ? "bg-white shadow-lg shadow-slate-900/5 border-b border-slate-100 py-2"
+          : "bg-white border-b border-transparent py-3 md:py-4"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -486,33 +487,14 @@ function HomePage({ onOpenContact }: { onOpenContact: () => void }) {
         </div>
       </section>
 
+      {/* Featured Products Section */}
+      <FeaturedProductsSection />
+
       {/* Testimonials Section */}
       <TestimonialsSection />
 
       {/* Partners Section */}
       <PartnersSection />
-
-      {/* CTA Section */}
-      <section className="py-16 bg-blue-600 relative overflow-hidden">
-        <div className="absolute top-0 right-0 -mt-20 -mr-20 w-80 h-80 bg-blue-500 rounded-full opacity-50 blur-3xl" />
-        <div className="absolute bottom-0 left-0 -mb-20 -ml-20 w-80 h-80 bg-blue-700 rounded-full opacity-50 blur-3xl" />
-
-        <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold text-white mb-6">
-            Prêt à moderniser votre infrastructure ?
-          </h2>
-          <p className="text-blue-100 text-lg mb-8">
-            Nos ingénieurs sont à votre disposition pour étudier vos besoins et
-            vous proposer la solution la plus adaptée.
-          </p>
-          <button
-            onClick={onOpenContact}
-            className="bg-white text-blue-600 px-8 py-4 rounded-md font-bold text-lg hover:bg-slate-50 transition-colors shadow-lg"
-          >
-            Contactez notre équipe
-          </button>
-        </div>
-      </section>
 
       {/* CTA Section */}
       <section className="py-16 bg-blue-600 relative overflow-hidden" id="contact">

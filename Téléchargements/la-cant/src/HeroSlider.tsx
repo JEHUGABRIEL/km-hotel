@@ -85,14 +85,14 @@ export function HeroSlider({
           >
             <button
               onClick={onScrollToServices}
-              className="bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-md font-semibold text-lg transition-all shadow-lg hover:shadow-blue-500/30 flex items-center justify-center gap-2"
+              className="bg-blue-600 hover:bg-blue-500 text-white px-6 py-3 rounded-md font-semibold text-base transition-all shadow-lg hover:shadow-blue-500/30 flex items-center justify-center gap-2 w-fit"
             >
               Découvrir nos services
               <ArrowRight className="w-5 h-5" />
             </button>
             <button
               onClick={onScrollToContact}
-              className="bg-white/10 hover:bg-white/20 text-white border border-white/30 px-8 py-4 rounded-md font-semibold text-lg transition-all backdrop-blur-sm"
+              className="bg-white/10 hover:bg-white/20 text-white border border-white/30 px-6 py-3 rounded-md font-semibold text-base transition-all backdrop-blur-sm w-fit"
             >
               Demander un devis
             </button>

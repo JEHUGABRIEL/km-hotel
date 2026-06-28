@@ -588,7 +588,7 @@ export function Boutique({ onOpenContact }: { onOpenContact?: () => void }) {
           </p>
           <button
             onClick={() => onOpenContact?.()}
-            className="bg-white text-blue-600 px-8 py-4 rounded-md font-bold text-lg hover:bg-slate-50 transition-colors shadow-lg"
+            className="bg-white text-blue-600 px-6 py-3 rounded-md font-bold text-base hover:bg-slate-50 transition-colors shadow-lg w-fit"
           >
             Demander un devis
           </button>
