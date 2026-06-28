@@ -88,8 +88,11 @@ function NavBar({ onOpenContact }: { onOpenContact: () => void }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { totalItems, setIsOpen } = useCart();
   const location = useLocation();
+  const isAdmin = location.pathname.startsWith("/admin");
   const isHome = location.pathname === "/";
   const isBoutique = location.pathname.startsWith("/boutique");
+
+  if (isAdmin) return null;
 
 
   useEffect(() => {
@@ -543,6 +546,7 @@ function PromoBanner({ onOpenContact }: { onOpenContact: () => void }) {
   const [dismissed, setDismissed] = useState(false);
   const location = useLocation();
   const { settings } = useSite();
+  const isAdmin = location.pathname.startsWith("/admin");
 
   // Réafficher le bandeau à chaque changement de page
   useEffect(() => {
@@ -553,7 +557,7 @@ function PromoBanner({ onOpenContact }: { onOpenContact: () => void }) {
     setDismissed(true);
   };
 
-  if (dismissed || !settings.promoEnabled) return null;
+  if (dismissed || !settings.promoEnabled || isAdmin) return null;
 
   return (
     <div className="sticky top-0 z-[60] bg-gradient-to-r from-amber-500 via-orange-500 to-amber-500 text-white">
@@ -601,6 +605,16 @@ function ProtectedAdminRoute() {
   return <AdminPage />;
 }
 
+function AdminLoginRoute() {
+  const { isAuthenticated } = useAuth();
+
+  if (isAuthenticated) {
+    return <Navigate to="/admin" replace />;
+  }
+
+  return <AdminLogin />;
+}
+
 export function App() {
   const [contactOpen, setContactOpen] = useState(false);
 
@@ -612,7 +626,7 @@ export function App() {
         <Route path="/" element={<HomePage onOpenContact={() => setContactOpen(true)} />} />
         <Route path="/boutique" element={<Boutique onOpenContact={() => setContactOpen(true)} />} />
         <Route path="/boutique/:id" element={<ProductPage />} />
-        <Route path="/admin/login" element={<AdminLogin />} />
+        <Route path="/admin/login" element={<AdminLoginRoute />} />
         <Route path="/admin" element={<ProtectedAdminRoute />} />
       </Routes>
       <ContactModal isOpen={contactOpen} onClose={() => setContactOpen(false)} />
